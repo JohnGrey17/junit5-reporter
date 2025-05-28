@@ -112,7 +112,7 @@ mvn clean package
 ### 4. Push results to Testomat.io:
 
 ```bash
-TESTOMATIO=tstmt_jZ3vHuylkuwXN2IRQ_hnR85JYNgy92FXAw1748344420 \
+TESTOMATIO=tstmt_******* \
 npx report-xml "/path/to/xml-reports/**.xml" --lang=""
 ```
 
