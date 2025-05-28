@@ -1,0 +1,9 @@
+testomat\implementation\HttpUtils.class
+testomat\implementation\TestomatReporterExtension.class
+testomat\implementation\StackTraceUtils.class
+testomat\implementation\TestMethodInfoExtractor.class
+testomat\implementation\TestRunClient.class
+testomat\anotations\Title.class
+testomat\anotations\EnableTestomatReporting.class
+testomat\implementation\TestReport.class
+testomat\anotations\TestId.class
