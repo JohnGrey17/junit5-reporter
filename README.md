@@ -1,14 +1,10 @@
-# JUnit 5 Reporter for Testomat.io
+# JUnit5 Reporter Integration with Testomat.io
 
-This library is a JUnit 5 extension that reports test execution metadata and results to [Testomat.io](https://testomat.io). It enables seamless integration by using custom annotations to describe and identify tests.
+This project demonstrates how to integrate JUnit5 tests with the custom `junit-reporter` library and upload test results to [Testomat.io](https://testomat.io) using a custom XML reporter.
 
----
+## 🧩 Maven Setup
 
-## 📦 Installation
-
-To use this library in your Maven project:
-
-### 1. Add the custom S3 Maven repository
+Add the following to your `pom.xml` file to include the reporter dependency and repository:
 
 ```xml
 <repositories>
@@ -17,11 +13,7 @@ To use this library in your Maven project:
     <url>s3://tomato.io/build/io/testomat/junit5-reporter/</url>
   </repository>
 </repositories>
-```
 
-### 2. Add the dependency
-
-```xml
 <dependencies>
   <dependency>
     <groupId>io.testomat</groupId>
@@ -31,11 +23,9 @@ To use this library in your Maven project:
 </dependencies>
 ```
 
----
+## 🔖 Annotating Your Tests
 
-## ✅ Usage Example
-
-Annotate your test class with `@EnableTestomatReporting`, and each test method with `@TestId` and `@Title`:
+To enable reporting, annotate your test class and test methods like this:
 
 ```java
 package org.example;
@@ -78,50 +68,54 @@ public class TomatoTests {
 }
 ```
 
-### 🔍 What do the annotations do?
+## ⚙️ How It Works
 
-- `@EnableTestomatReporting` – enables the Testomat.io integration for the test class.
-- `@TestId("...")` – assigns a unique Testomat.io test ID to the test method.
-- `@Title("...")` – provides a human-readable name for the test.
+- `@EnableTestomatReporting`: Enables the reporter to hook into the test lifecycle.
+- `@TestId`: Assigns a unique ID to the test for linking in Testomat.io.
+- `@Title`: Adds a human-readable name for display in the report.
 
----
+## 🚀 Run and Report
 
-## 🚀 Running & Reporting Tests
+You will need:
+- Git Bash or terminal
+- Maven installed
+- Node.js >= 14 installed
 
-### 1. Requirements
-
-- Git Bash (or compatible terminal)
-- NodeJS ≥ 14
-- Maven
-
-### 2. Install the Testomat reporter CLI globally:
+Install the reporter globally:
 
 ```bash
 npm i -g @testomatio/reporter
 ```
 
-If you get a `command not found` error, install NodeJS from:  
-🔗 https://nodejs.org/en/download
-
-### 3. Run tests and generate the report:
+Run your tests and generate the XML report:
 
 ```bash
 mvn clean package
 ```
 
-### 4. Push results to Testomat.io:
+Upload the XML report to Testomat.io:
 
 ```bash
-TESTOMATIO=tstmt_******* \
-npx report-xml "/path/to/xml-reports/**.xml" --lang=""
+TESTOMATIO=tstmt_jZ3vHuylkuwXN2IRQ_hnR85JYNgy92FXAw1748344420 npx report-xml "target/surefire-reports/*.xml" --lang=""
 ```
 
-Make sure to replace `/path/to/xml-reports/**.xml` with the actual path to your generated JUnit XML reports.
+If you get `command not found`, install Node.js from [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
+
+## 📊 After Upload
+
+After successful execution, you will see logs like:
+
+```
+🤩 Testomat.io XML Reporter v1.6.17
+[TESTOMATIO] Pipes: Testomatio Reporter
+[TESTOMATIO] Testomatio Reporter v1.6.17
+[TESTOMATIO] Parsed target\surefire-reports\TEST-org.example.{report name}.xml
+[TESTOMATIO] 📊 Report created. Report ID: Test ID
+[TESTOMATIO] 📊 Report Saved. Report URL: https://app.testomat.io/projects/{Test}/runs/{Test id}/report
+```
+
+You can follow the link to see the full test report on [Testomat.io](https://testomat.io).
 
 ---
 
-## 🧠 Summary
-
-This library simplifies the connection between your JUnit 5 tests and Testomat.io. With just a few annotations and setup steps, your test results and metadata can be automatically synchronized and visualized inside Testomat.io’s test management system.
-
----
+Happy Testing! 🎉
